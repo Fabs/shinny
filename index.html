@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title></title>
+  <title>A/B Testing Interfaces</title>
   <meta charset="utf-8">
-  <meta name="description" content="">
-  <meta name="author" content="">
+  <meta name="description" content="A/B Testing Interfaces">
+  <meta name="author" content="Fabricio Nascimento">
   <meta name="generator" content="slidify" />
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
@@ -32,9 +32,9 @@
     <!-- LOGO SLIDE -->
         <slide class="title-slide segue nobackground">
   <hgroup class="auto-fadein">
-    <h1></h1>
-    <h2></h2>
-    <p><br/></p>
+    <h1>A/B Testing Interfaces</h1>
+    <h2>How to check for statistical validity after A/B testing an interface</h2>
+    <p>Fabricio Nascimento<br/>Programmer</p>
   </hgroup>
   <article></article>  
 </slide>
@@ -43,25 +43,91 @@
     <!-- SLIDES -->
     <slide class="" id="slide-1" style="background:;">
   <hgroup>
-    <h2>Read-And-Delete</h2>
+    <h2>Knowing the impact of interfaces can be hard.</h2>
   </hgroup>
   <article data-timings="">
-    <ol>
-<li>Edit YAML front matter</li>
-<li>Write using R Markdown</li>
-<li>Use an empty line followed by three dashes to separate slides!</li>
-</ol>
+    <p>Somestimes you have a new feature or interface change and you do not know how your users are going to react to it?</p>
+
+<ul>
+<li>Will that increase revenue?</li>
+<li>Will more users sign up?</li>
+</ul>
 
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="class" id="id" style="background:;">
+<slide class="" id="slide-2" style="background:;">
   <hgroup>
-    <h2>Slide 2</h2>
+    <h2>What is A/B Testing?</h2>
   </hgroup>
   <article data-timings="">
-    
+    <p><img src="https://tctechcrunch2011.files.wordpress.com/2014/06/ab-infographic.png?w=680&amp;h=340" alt="width"></p>
+
+<ul>
+<li>A/B testing is a technique where you split <strong>randomly</strong> your users assigning then to two groups (A and B).</li>
+<li>Each group will see a version of your site (it could be the new vs the old, or many options)</li>
+<li>It could be A/B/C/D/.../Z testing</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>Inference Test</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Let&#39;s suppose you did this, 100 users for each group, 23% converted on group A and 11% converted on group B.</p>
+
+<p><img src="https://vwo.com/images/page_ab_testing/02.png.pagespeed.ce.BmWcShEZAM.png" alt="width"></p>
+
+<ul>
+<li>Could it be by chance?</li>
+<li>How to know if this is relevant?</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>Chi Square Analysis</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">#c(click, not_clicked)
+a_group = c(23, 100 - 23)
+b_group = c(11, 100 - 11)
+data.table = rbind(a_group, b_group)
+chisq.test(data.table)
+</code></pre>
+
+<pre><code>## 
+##  Pearson&#39;s Chi-squared test with Yates&#39; continuity correction
+## 
+## data:  data.table
+## X-squared = 4.2877, df = 1, p-value = 0.03839
+</code></pre>
+
+<ul>
+<li>Our NULL hypothesis is that A and B come from the same distribution</li>
+<li>Since p-value is below 0.05, hour hypotesis is <strong>false</strong>, and thus, page shown to group A, is better.</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-5" style="background:;">
+  <hgroup>
+    <h2>Example</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>You can try your own test here:
+<a href="https://fabs.shinyapps.io/site">https://fabs.shinyapps.io/site</a></p>
+
   </article>
   <!-- Presenter Notes -->
 </slide>
@@ -72,14 +138,32 @@
     <ul>
       <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=1 title='Read-And-Delete'>
+        data-slide=1 title='Knowing the impact of interfaces can be hard.'>
          1
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=2 title='Slide 2'>
+        data-slide=2 title='What is A/B Testing?'>
          2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Inference Test'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Chi Square Analysis'>
+         4
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title='Example'>
+         5
       </a>
     </li>
   </ul>

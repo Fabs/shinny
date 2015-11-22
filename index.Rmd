@@ -1,8 +1,8 @@
 ---
-title       : 
-subtitle    : 
-author      : 
-job         : 
+title       : "A/B Testing Interfaces"
+subtitle    : "How to check for statistical validity after A/B testing an interface"
+author      : "Fabricio Nascimento"
+job         : "Programmer"
 framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
 highlighter : highlight.js  # {highlight.js, prettify, highlight}
 hitheme     : tomorrow      # 
@@ -11,16 +11,50 @@ mode        : selfcontained # {standalone, draft}
 knit        : slidify::knit2slides
 ---
 
-## Read-And-Delete
+## Knowing the impact of interfaces can be hard.
 
-1. Edit YAML front matter
-2. Write using R Markdown
-3. Use an empty line followed by three dashes to separate slides!
+Somestimes you have a new feature or interface change and you do not know how your users are going to react to it?
+- Will that increase revenue?
+- Will more users sign up?
 
---- .class #id 
+---
+## What is A/B Testing?
 
-## Slide 2
+![width](https://tctechcrunch2011.files.wordpress.com/2014/06/ab-infographic.png?w=680&h=340)
 
+- A/B testing is a technique where you split **randomly** your users assigning then to two groups (A and B).
+- Each group will see a version of your site (it could be the new vs the old, or many options)
+- It could be A/B/C/D/.../Z testing
+
+---
+## Inference Test
+
+Let's suppose you did this, 100 users for each group, 23% converted on group A and 11% converted on group B.
+
+![width](https://vwo.com/images/page_ab_testing/02.png.pagespeed.ce.BmWcShEZAM.png)
+
+- Could it be by chance?
+- How to know if this is relevant?
+
+---
+## Chi Square Analysis
+
+```{r}
+#c(click, not_clicked)
+a_group = c(23, 100 - 23)
+b_group = c(11, 100 - 11)
+data.table = rbind(a_group, b_group)
+chisq.test(data.table)
+```
+
+- Our NULL hypothesis is that A and B come from the same distribution
+- Since p-value is below 0.05, hour hypotesis is **false**, and thus, page shown to group A, is better.
+
+---
+## Example
+
+You can try your own test here:
+https://fabs.shinyapps.io/site
 
 
 
